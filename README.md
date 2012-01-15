@@ -42,16 +42,34 @@ You can pass any number of test names to run focused tests also:
 
     OK (1 tests)
 
+You can write your own assertions.  Implement a function which takes a filename
+and line number as its first two parameters.  Call `assert_fail` if your
+assertion fails.  Create a macro so you don't have to manually pass in the
+`file` and `line` parameters.
+
+    #define assert_is_99(i) assert_is_99_(__FILE__,__LINE__,(i))
+
+    void assert_is_99_(const char *file, int line, int myint) {
+      if (myint != 99) {
+        assert_fail(file, line, "Expected <99> but was <%d>", myint);
+      }
+    }
+
+    void test_something {
+      assert_is_99(99);  // passes
+      assert_is_99(100); // fails
+    }
+
 TODO
 ====
 
 * implement assertions
+* system installation option
 * faster test discovery
 * regex support
 * add a `--tests` option to list all tests
 * add zsh autocompletion file
 * add vim quickfix config
-* better examples
 
 License
 =======
