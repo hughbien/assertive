@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <setjmp.h>
 #include "assertive.h"
 
 static void (*assert_test_fns[ASSERTIVE_MAX_TESTS])();
@@ -8,6 +9,7 @@ static int assert_test_flags[ASSERTIVE_MAX_TESTS];
 static int assert_test_count = 0;
 static int assert_test_index = 0;
 static char assert_test_buffer[ASSERTIVE_MAX_BUFFER];
+static jmp_buf assert_test_jump;
 
 static int assert_test_continue(int argc, char *argv[], const char *name) {
   if (argc == 1) { return 0; }
@@ -28,12 +30,15 @@ int assert_run(int argc, char *argv[]) {
   int passes = 0;
   int fails = 0;
 
-  for (assert_test_index = 0; assert_test_index < assert_test_count; assert_test_index++) {
+  assert_test_index = 0;
+  while (assert_test_index < assert_test_count) {
     if (assert_test_continue(argc, argv, assert_test_names[assert_test_index])) {
       continue;
     }
     assert_test_flags[assert_test_index] = 0;
-    assert_test_fns[assert_test_index]();
+    if (!setjmp(assert_test_jump)) {
+      assert_test_fns[assert_test_index]();
+    }
     if (assert_test_flags[assert_test_index]) {
       printf("F");
       fails++;
@@ -41,6 +46,7 @@ int assert_run(int argc, char *argv[]) {
       printf(".");
       passes++;
     }
+    assert_test_index++;
   }
 
   if (fails > 0) {
@@ -66,18 +72,17 @@ void assert_fail(const char *file, int line, const char *message) {
       message);
   strcat(assert_test_buffer, temp);
   assert_test_flags[assert_test_index] = 1;
+  longjmp(assert_test_jump, 1);
 }
 
-int assert_true_(const char *file, int line, int cond) {
+void assert_true_(const char *file, int line, int cond) {
   if (!cond) {
     assert_fail(file, line, "Expected true but was not");
   }
-  return cond;
 }
 
-int assert_false_(const char *file, int line, int cond) {
+void assert_false_(const char *file, int line, int cond) {
   if (cond) {
     assert_fail(file, line, "Expected false but was true");
   }
-  return !cond;
 }
