@@ -89,3 +89,9 @@ void assert_false_(const char *file, int line, int cond) {
     assert_fail(file, line, "Expected false but was true");
   }
 }
+
+void assert_null_(const char *file, int line, void *pointer) {
+  if (pointer != NULL) {
+    assert_fail(file, line, "Expected null but was not");
+  }
+}
