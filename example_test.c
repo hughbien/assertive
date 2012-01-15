@@ -26,6 +26,23 @@ void test_null_fail() {
   assert_null(&x);
 }
 
+void test_not_null_pass() {
+  int x = 1;
+  assert_not_null(&x);
+}
+
+void test_not_null_fail() {
+  assert_not_null(NULL);
+}
+
+void test_str_equal_pass() {
+  assert_str_equal("lorem", "lorem");
+}
+
+void test_str_equal_fail() {
+  assert_str_equal("lorem", "ipsum");
+}
+
 int main(int argc, char *argv[]) {
   assert_add(test_truth_pass);
   assert_add(test_truth_fail);
@@ -33,6 +50,10 @@ int main(int argc, char *argv[]) {
   assert_add(test_false_fail);
   assert_add(test_null_pass);
   assert_add(test_null_fail);
+  assert_add(test_not_null_pass);
+  assert_add(test_not_null_fail);
+  assert_add(test_str_equal_pass);
+  assert_add(test_str_equal_fail);
   assert_run(argc, argv);
   return 0;
 }

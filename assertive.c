@@ -101,3 +101,21 @@ void assert_null_(const char *file, int line, void *pointer) {
     assert_fail(file, line, "Expected <null> but was not");
   }
 }
+
+void assert_not_null_(const char *file, int line, void *pointer) {
+  if (pointer == NULL) {
+    assert_fail(file, line, "Expected not <null> but was");
+  }
+}
+
+void assert_str_equal_(const char *file, int line, char *ex, char *ac) {
+  if (strcmp(ex, ac) != 0) {
+    assert_fail(file, line, "Expected <\"%s\"> but was <\"%s\">", ex, ac);
+  }
+}
+
+void assert_str_not_equal_(const char *file, int line, char *ex, char *ac) {
+  if (strcmp(ex, ac) == 0) {
+    assert_fail(file, line, "Expected not <\"%s\"> but was", ex);
+  }
+}

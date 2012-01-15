@@ -10,7 +10,7 @@
 #define assert_false(cond)             assert_false_(__FILE__,__LINE__,(cond))
 #define assert_null(p)                 assert_null_(__FILE__,__LINE__,(p))
 #define assert_not_null(p)             assert_not_null_(__FILE__,__LINE__,(p))
-#define assert_str_equal(ex,ac)        assert_str_equal_(__FILE__,__LINE__,(p))
+#define assert_str_equal(ex,ac)        assert_str_equal_(__FILE__,__LINE__,(ex),(ac))
 #define assert_str_not_equal(ex,ac)    assert_str_not_equal_(__FILE__,__LINE__,(ex),(ac))
 #define assert_int_equal(ex,ac)        assert_int_equal_(__FILE__,__LINE__,(ex),(ac))
 #define assert_int_not_equal(ex,ac)    assert_int_not_equal_(__FILE__,__LINE__,(ex),(ac))
@@ -29,8 +29,8 @@ void assert_true_(const char *file, int line, int cond);
 void assert_false_(const char *file, int line, int cond);
 void assert_null_(const char *file, int line, void *pointer);
 void assert_not_null_(const char *file, int line, void *pointer);
-void assert_str_equal_(const char *file, int line, const char *ex, const char *ac);
-void assert_str_not_equal_(const char *file, int line, const char *ex, const char *ac);
+void assert_str_equal_(const char *file, int line, char *ex, char *ac);
+void assert_str_not_equal_(const char *file, int line, char *ex, char *ac);
 void assert_int_equal_(const char *file, int line, int ex, int ac);
 void assert_int_not_equal_(const char *file, int line, int ex, int ac);
 void assert_dbl_equal_(const char *file, int line, double ex, double ac, double delta);
