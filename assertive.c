@@ -1,7 +1,8 @@
+#include <assert.h>
+#include <setjmp.h>
+#include <stdarg.h>
 #include <stdio.h>
 #include <string.h>
-#include <setjmp.h>
-#include <assert.h>
 #include "assertive.h"
 
 static void (*assert_test_fns[ASSERTIVE_MAX_TESTS])();
@@ -60,12 +61,17 @@ int assert_run(int argc, char *argv[]) {
   }
 }
 
-void assert_fail(const char *file, int line, const char *message) {
+void assert_fail(const char *file, int line, const char *format, ...) {
+  va_list args;
+  char message[ASSERTIVE_MAX_STRING];
   char temp[ASSERTIVE_MAX_STRING];
   int index, fails = 0;
   for (index = 0; index < assert_test_index; index++) {
     if (assert_test_flags[index]) { fails++; }
   }
+  va_start(args, format);
+  vsnprintf(message, ASSERTIVE_MAX_STRING, format, args);
+  va_end(args);
   snprintf(temp, ASSERTIVE_MAX_STRING, "%d) %s@%s:%d %s\n", 
       fails + 1,
       assert_test_names[assert_test_index],
@@ -80,18 +86,18 @@ void assert_fail(const char *file, int line, const char *message) {
 
 void assert_true_(const char *file, int line, int cond) {
   if (!cond) {
-    assert_fail(file, line, "Expected true but was not");
+    assert_fail(file, line, "Expected <true> but was <%d>", cond);
   }
 }
 
 void assert_false_(const char *file, int line, int cond) {
   if (cond) {
-    assert_fail(file, line, "Expected false but was true");
+    assert_fail(file, line, "Expected <false> but was <%d>", cond);
   }
 }
 
 void assert_null_(const char *file, int line, void *pointer) {
   if (pointer != NULL) {
-    assert_fail(file, line, "Expected null but was not");
+    assert_fail(file, line, "Expected <null> but was not");
   }
 }

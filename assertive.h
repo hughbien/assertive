@@ -22,7 +22,7 @@
 
 /* public functions */
 int assert_run(int argc, char *argv[]);
-void assert_fail(const char *file, int line, const char *message);
+void assert_fail(const char *file, int line, const char *format, ...);
 
 /* internal assert functions */
 void assert_true_(const char *file, int line, int cond);
