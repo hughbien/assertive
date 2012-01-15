@@ -119,3 +119,15 @@ void assert_str_not_equal_(const char *file, int line, char *ex, char *ac) {
     assert_fail(file, line, "Expected not <\"%s\"> but was", ex);
   }
 }
+
+void assert_int_equal_(const char *file, int line, int ex, int ac) {
+  if (ex != ac) {
+    assert_fail(file, line, "Expected <%d> but was <%d>", ex, ac);
+  }
+}
+
+void assert_int_not_equal_(const char *file, int line, int ex, int ac) {
+  if (ex == ac) {
+    assert_fail(file, line, "Expected not <%d> but was", ex);
+  }
+}
