@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <setjmp.h>
+#include <assert.h>
 #include "assertive.h"
 
 static void (*assert_test_fns[ASSERTIVE_MAX_TESTS])();
@@ -21,6 +22,7 @@ static int assert_test_continue(int argc, char *argv[], const char *name) {
 }
 
 void assert_add_(void (*fn)(), const char *name) {
+  assert(assert_test_count < ASSERTIVE_MAX_TESTS);
   assert_test_fns[assert_test_count] = fn;
   assert_test_names[assert_test_count] = name;
   assert_test_count++;
@@ -70,6 +72,7 @@ void assert_fail(const char *file, int line, const char *message) {
       file,
       line,
       message);
+  assert(strlen(assert_test_buffer) + strlen(temp) < ASSERTIVE_MAX_BUFFER);
   strcat(assert_test_buffer, temp);
   assert_test_flags[assert_test_index] = 1;
   longjmp(assert_test_jump, 1);
