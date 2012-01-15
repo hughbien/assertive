@@ -9,7 +9,6 @@ Usage
 Just two files are required: `assertive.h` and `assertive.c`.  Here's an
 example test file:
 
-    #include <stdio.h>
     #incldue "assertive.h"
 
     void test_addition() {
@@ -32,14 +31,14 @@ Then on the command line:
     % a.out
     .F
 
-    1) test_str_fail:9 Expected <"expected"> but was <"actual">
+    1) test_str@example.c:9 Expected <"expected"> but was <"actual">
 
     Passes: 1, Fails: 1
 
 You can pass any number of test names to run focused tests also:
 
     % a.out test_addition
-    ..
+    .
 
     OK (1 tests)
 
@@ -48,6 +47,7 @@ TODO
 
 * implement assertions
 * faster test discovery
+* regex support
 * add a `--tests` option to list all tests
 * add zsh autocompletion file
 * add vim quickfix config

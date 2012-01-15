@@ -1,13 +1,10 @@
-#include <stdio.h>
 #include "assertive.h"
 
 void test_truth_pass() {
   assert_true(1);
-  assert_true(2);
 }
 
 void test_truth_fail() {
-  assert_true(1);
   assert_true(0);
 }
 
@@ -16,7 +13,6 @@ void test_false_pass() {
 }
 
 void test_false_fail() {
-  assert_false(0);
   assert_false(1);
 }
 
