@@ -1,7 +1,7 @@
 Description
 ===========
 
-Assertive is an incomplete unit test library for C.
+Assertive is a unit test library for C.
 
 Install
 =======
@@ -90,6 +90,8 @@ assertion fails.  Create a macro so you don't have to manually pass in the
       assert_is_99(99);  // passes
       assert_is_99(100); // fails
     }
+
+See `assertive.h` for a list of the built-in assertions.
 
 TODO
 ====
