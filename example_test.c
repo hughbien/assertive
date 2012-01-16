@@ -43,12 +43,28 @@ void test_str_equal_fail() {
   assert_str_equal("lorem", "ipsum");
 }
 
+void test_str_not_equal_pass() {
+  assert_str_not_equal("lorem", "ipsum");
+}
+
+void test_str_not_equal_fail() {
+  assert_str_not_equal("lorem", "lorem");
+}
+
 void test_int_equal_pass() {
   assert_int_equal(1, 1);
 }
 
 void test_int_equal_fail() {
   assert_int_equal(1, -1);
+}
+
+void test_int_not_equal_pass() {
+  assert_int_not_equal(1, -1);
+}
+
+void test_int_not_equal_fail() {
+  assert_int_not_equal(1, 1);
 }
 
 int main(int argc, char *argv[]) {
@@ -62,8 +78,12 @@ int main(int argc, char *argv[]) {
   assert_add(test_not_null_fail);
   assert_add(test_str_equal_pass);
   assert_add(test_str_equal_fail);
+  assert_add(test_str_not_equal_pass);
+  assert_add(test_str_not_equal_fail);
   assert_add(test_int_equal_pass);
   assert_add(test_int_equal_fail);
+  assert_add(test_int_not_equal_pass);
+  assert_add(test_int_not_equal_fail);
   assert_run(argc, argv);
   return 0;
 }
