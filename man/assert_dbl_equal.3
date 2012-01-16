@@ -1,0 +1,24 @@
+.TH assert_dbl_equal 3
+.SH NAME
+.PP
+assert_dbl_equal - assert two doubles are equal
+.SH SYNOPSIS
+.PP
+.nf
+\f[C]
+#include <assertive.h>
+
+void assert_dbl_equal(double expected, double actual, double delta);
+\f[]
+.SH DESCRIPTION
+.PP
+.nf
+Passes if expected double is within delta range of actual double.
+.SH SEE ALSO
+.PP
+.nf
+assertive(3), assert_true(3), assert_false(3), assert_null(3),
+assert_not_null(3), assert_str_equal(3), assert_str_not_equal(3),
+assert_int_equal(3), assert_int_not_equal(3), assert_dbl_not_equal(3),
+assert_ptr_equal(3), assert_ptr_not_equal(3), assert_add(3), assert_run(3),
+assert_fail(3)

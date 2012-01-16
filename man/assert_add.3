@@ -1,0 +1,37 @@
+.TH assert_add 3
+.SH NAME
+.PP
+assert_add - add a test
+.SH SYNOPSIS
+.PP
+.nf
+\f[C]
+#include <assertive.h>
+
+void assert_add(void (*test_fn)());
+\f[]
+.SH DESCRIPTION
+.PP
+.nf
+Add a test for running:
+
+\f[C]
+  #include <assertive.h>
+  
+  void test_truth() { /* assertions here */  }
+  void test_false() { /* assertions here */  }
+  int main(int argc, char *argv[]) {
+    assert_add(test_truth);
+    return assert_run(argc, argv);
+  }
+\f[]
+
+In the example above, `test_truth` runs but `test_false` does not.
+.SH SEE ALSO
+.PP
+.nf
+assertive(3), assert_true(3), assert_false(3), assert_null(3),
+assert_not_null(3), assert_str_equal(3), assert_str_not_equal(3),
+assert_int_equal(3), assert_int_not_equal(3), assert_dbl_equal(3),
+assert_dbl_not_equal(3), assert_ptr_equal(3), assert_ptr_not_equal(3),
+assert_run(3), assert_fail(3)

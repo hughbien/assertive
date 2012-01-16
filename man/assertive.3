@@ -1,0 +1,56 @@
+.TH assertive 3
+.SH NAME
+.PP
+assertive - unit test library for C
+.SH SYNOPSIS
+.PP
+.nf
+\f[C]
+#include <assertive.h>
+
+/* assertions */
+void assert_true(int expression);
+void assert_false(int expression);
+void assert_null(void *pointer);
+void assert_not_null(void *pointer);
+void assert_str_equal(char *expected, char *actual);
+void assert_str_not_equal(char *expected, char *actual);
+void assert_int_equal(int expected, int actual);
+void assert_int_not_equal(int expected, int actual);
+void assert_dbl_equal(double expected, double actual, double delta);
+void assert_dbl_not_equal(double expected, double actual, double delta);
+void assert_ptr_equal(void *expected, void *actual);
+void assert_ptr_not_equal(void *expected, void *actual);
+
+/* run tests */
+void assert_add(void (*test_fn)());
+int assert_run(int argc, char *argv[]);
+\f[]
+.SH DESCRIPTION
+.PP
+.nf
+A unit test library for the C language.  An example test file:
+
+\f[C]
+  #incldue <assertive.h>
+
+  void test_addition() {
+    assert_int_equal(2, 1+1);
+  }
+
+  int main(int argc, char *argv[]) {
+    assert_add(test_addition);
+    return assert_run(argc, argv);
+  }
+\f[]
+
+The compiled executable takes test names as arguments.  Without any arguments,
+it will run all tests.  Use the `-t` option for a list of names.
+.SH SEE ALSO
+.PP
+.nf
+assert_true(3), assert_false(3), assert_null(3), assert_not_null(3),
+assert_str_equal(3), assert_str_not_equal(3), assert_int_equal(3),
+assert_int_not_equal(3), assert_dbl_equal(3), assert_dbl_not_equal(3),
+assert_ptr_equal(3), assert_ptr_not_equal(3), assert_add(3), assert_run(3),
+assert_fail(3)

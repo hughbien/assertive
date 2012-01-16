@@ -1,0 +1,24 @@
+.TH assert_null 3
+.SH NAME
+.PP
+assert_null - assert pointer is null
+.SH SYNOPSIS
+.PP
+.nf
+\f[C]
+#include <assertive.h>
+
+void assert_null(void *pointer);
+\f[]
+.SH DESCRIPTION
+.PP
+.nf
+Passes if the argument is a null pointer.
+.SH SEE ALSO
+.PP
+.nf
+assertive(3), assert_true(3), assert_false(3), assert_not_null(3),
+assert_str_equal(3), assert_str_not_equal(3), assert_int_equal(3),
+assert_int_not_equal(3), assert_dbl_equal(3), assert_dbl_not_equal(3),
+assert_ptr_equal(3), assert_ptr_not_equal(3), assert_add(3), assert_run(3),
+assert_fail(3)

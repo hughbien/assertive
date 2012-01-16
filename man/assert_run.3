@@ -1,0 +1,43 @@
+.TH assert_run 3
+.SH NAME
+.PP
+assert_run - run tests
+.SH SYNOPSIS
+.PP
+.nf
+\f[C]
+#include <assertive.h>
+
+int assert_run(int argc, char *argv[]);
+\f[]
+.SH DESCRIPTION
+.PP
+.nf
+Run tests.  The arguments are the same as the `main` function, it's used
+to parse command line arguments to run focused tests.
+
+\f[C]
+  #include <assertive.h>
+  
+  void test_1() { /* assertions here */  }
+  void test_2() { /* assertions here */  }
+  int main(int argc, char *argv[]) {
+    assert_add(test_1);
+    assert_add(test_2);
+    return assert_run(argc, argv);
+  }
+\f[]
+
+Once compiled, you can run all tests with `a.out` or run a single test
+by passing the test name like `a.out test_1`.
+
+The return value is 0 for all passing or non-zero for test failure(s).
+
+.SH SEE ALSO
+.PP
+.nf
+assertive(3), assert_true(3), assert_false(3), assert_null(3),
+assert_not_null(3), assert_str_equal(3), assert_str_not_equal(3),
+assert_int_equal(3), assert_int_not_equal(3), assert_dbl_equal(3),
+assert_dbl_not_equal(3), assert_ptr_equal(3), assert_ptr_not_equal(3),
+assert_add(3), assert_fail(3)

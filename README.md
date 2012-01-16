@@ -99,6 +99,14 @@ assertion fails.  Create a macro so you don't have to manually pass in the
       assert_is_99(100); // fails
     }
 
+Documentation
+=============
+
+Man pages are available under the `man` directory.  To install, copy them to
+your `$MANPATH` directory.  For example:
+
+    % cp man/* /usr/share/man/man3/.
+
 Zsh Tab Completion
 ==================
 
