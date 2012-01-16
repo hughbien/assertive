@@ -1,4 +1,5 @@
 #include <assert.h>
+#include <math.h>
 #include <setjmp.h>
 #include <stdarg.h>
 #include <stdio.h>
@@ -129,5 +130,17 @@ void assert_int_equal_(const char *file, int line, int ex, int ac) {
 void assert_int_not_equal_(const char *file, int line, int ex, int ac) {
   if (ex == ac) {
     assert_fail(file, line, "Expected not <%d> but was", ex);
+  }
+}
+
+void assert_dbl_equal_(const char *file, int line, double ex, double ac, double dt) {
+  if (fabs(ex - ac) > dt) {
+    assert_fail(file, line, "Expected <%g> but was <%g>", ex, ac);
+  }
+}
+
+void assert_dbl_not_equal_(const char *file, int line, double ex, double ac, double dt) {
+  if (fabs(ex - ac) <= dt) {
+    assert_fail(file, line, "Expected not <%g> but was", ex);
   }
 }

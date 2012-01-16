@@ -67,6 +67,22 @@ void test_int_not_equal_fail() {
   assert_int_not_equal(1, 1);
 }
 
+void test_dbl_equal_pass() {
+  assert_dbl_equal(1.0, 1.05, 0.1);
+}
+
+void test_dbl_equal_fail() {
+  assert_dbl_equal(1.0, 1.15, 0.1);
+}
+
+void test_dbl_not_equal_pass() {
+  assert_dbl_not_equal(1.0, 1.15, 0.1);
+}
+
+void test_dbl_not_equal_fail() {
+  assert_dbl_not_equal(1.0, 1.05, 0.1);
+}
+
 int main(int argc, char *argv[]) {
   assert_add(test_truth_pass);
   assert_add(test_truth_fail);
@@ -84,6 +100,9 @@ int main(int argc, char *argv[]) {
   assert_add(test_int_equal_fail);
   assert_add(test_int_not_equal_pass);
   assert_add(test_int_not_equal_fail);
-  assert_run(argc, argv);
-  return 0;
+  assert_add(test_dbl_equal_pass);
+  assert_add(test_dbl_equal_fail);
+  assert_add(test_dbl_not_equal_pass);
+  assert_add(test_dbl_not_equal_fail);
+  return assert_run(argc, argv);
 }
