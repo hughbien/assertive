@@ -128,10 +128,16 @@ This only works if the compiled binary is named `assertive`.
     % assertive test_<tab>
     test_addition test_addition_dbl test_str
 
-TODO
-====
+Vim Quickfix
+============
 
-* add vim quickfix config
+For Quickfix support, add this to your errorformat:
+
+    set errorformat+=%n)\ %.%#@%f:%l\ %m,%-G%.%#
+
+I added this line to my `.vimrc` file for editing C:
+
+    au filetype c set efm+=%n)\ %.%#@%f:%l\ %m,%-G%.%# " assertive support
 
 License
 =======
