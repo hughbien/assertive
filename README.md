@@ -63,7 +63,6 @@ assertion fails.  Create a macro so you don't have to manually pass in the
 TODO
 ====
 
-* implement assertions
 * system installation option
 * faster test discovery
 * regex support
