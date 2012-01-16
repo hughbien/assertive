@@ -52,6 +52,11 @@ Then on the command line:
 
     Passes: 1, Fails: 1
 
+See `assertive.h` for a list of the built-in assertions.
+
+Run Focused Tests
+=================
+
 You can pass any number of test names to run focused tests also:
 
     % a.out test_addition
@@ -93,8 +98,6 @@ assertion fails.  Create a macro so you don't have to manually pass in the
       assert_is_99(99);  // passes
       assert_is_99(100); // fails
     }
-
-See `assertive.h` for a list of the built-in assertions.
 
 Zsh Tab Completion
 ==================
