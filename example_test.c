@@ -83,6 +83,30 @@ void test_dbl_not_equal_fail() {
   assert_dbl_not_equal(1.0, 1.05, 0.1);
 }
 
+void test_ptr_equal_pass() {
+  int x = 1;
+  int *p1 = &x, *p2 = &x;
+  assert_ptr_equal(p1, p2);
+}
+
+void test_ptr_equal_fail() {
+  int x = 1, y = 2;
+  int *p1 = &x, *p2 = &y;
+  assert_ptr_equal(p1, p2);
+}
+
+void test_ptr_not_equal_pass() {
+  int x = 1, y = 2;
+  int *p1 = &x, *p2 = &y;
+  assert_ptr_not_equal(p1, p2);
+}
+
+void test_ptr_not_equal_fail() {
+  int x = 1;
+  int *p1 = &x, *p2 = &x;
+  assert_ptr_not_equal(p1, p2);
+}
+
 int main(int argc, char *argv[]) {
   assert_add(test_truth_pass);
   assert_add(test_truth_fail);
@@ -104,5 +128,9 @@ int main(int argc, char *argv[]) {
   assert_add(test_dbl_equal_fail);
   assert_add(test_dbl_not_equal_pass);
   assert_add(test_dbl_not_equal_fail);
+  assert_add(test_ptr_equal_pass);
+  assert_add(test_ptr_equal_fail);
+  assert_add(test_ptr_not_equal_pass);
+  assert_add(test_ptr_not_equal_fail);
   return assert_run(argc, argv);
 }

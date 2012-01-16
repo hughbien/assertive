@@ -144,3 +144,15 @@ void assert_dbl_not_equal_(const char *file, int line, double ex, double ac, dou
     assert_fail(file, line, "Expected not <%g> but was", ex);
   }
 }
+
+void assert_ptr_equal_(const char *file, int line, void *ex, void *ac) {
+  if (ex != ac) {
+    assert_fail(file, line, "Expected <%p> but was <%p>", ex, ac);
+  }
+}
+
+void assert_ptr_not_equal_(const char *file, int line, void *ex, void *ac) {
+  if (ex == ac) {
+    assert_fail(file, line, "Expected not <%p> but was", ex);
+  }
+}
