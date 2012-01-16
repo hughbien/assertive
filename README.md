@@ -14,7 +14,7 @@ Optionally, you can create a static library for all your projects:
     % cp libassertive.a /usr/local/lib/.
     % cp assertive.h /usr/local/include/.
     % cd path/to/project
-    % gcc -I/usr/local/include -L/usr/local/lib -lassertive *.c
+    % gcc -lassertive *.c
 
 Usage
 =====
@@ -73,6 +73,9 @@ This is handy along with `xargs`:
 
     OK (2 tests)
 
+Custom Assertions
+=================
+
 You can write your own assertions.  Implement a function which takes a filename
 and line number as its first two parameters.  Call `assert_fail` if your
 assertion fails.  Create a macro so you don't have to manually pass in the
@@ -93,10 +96,30 @@ assertion fails.  Create a macro so you don't have to manually pass in the
 
 See `assertive.h` for a list of the built-in assertions.
 
+Zsh Tab Completion
+==================
+
+Here's an example zsh completion function for the binary `assertive`:
+
+    #compdef assertive
+    compadd `assertive -t | sort`
+
+I placed this into an `_assertive` file and into my `site-functions` directory
+for zsh.  This is located wherever `$fpath` points to:
+
+    % echo $fpath
+    /usr/share/zsh/site-functions /usr/share/zsh/4.3.11/functions
+    % sudo mv _assertive /usr/share/zsh/site-functions
+
+This only works if the compiled binary is named `assertive`.
+
+    % gcc -lassertive *.c -o assertive
+    % assertive test_<tab>
+    test_addition test_addition_dbl test_str
+
 TODO
 ====
 
-* add zsh autocompletion file
 * add vim quickfix config
 
 License
