@@ -3,6 +3,7 @@
 #include <setjmp.h>
 #include <stdarg.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include "assertive.h"
 
@@ -23,25 +24,23 @@ static int assert_test_continue(int argc, char *argv[], const char *name) {
   return 1;
 }
 
-static int assert_test_list(char *argv[]) {
-  if (strcmp(argv[1], "--tests") == 0 || strcmp(argv[1], "-t") == 0) {
+static void assert_test_list(int argc, char *argv[]) {
+  if (argc == 2 && (strcmp(argv[1], "--tests") == 0 || strcmp(argv[1], "-t") == 0)) {
     int index = 0;
     while (index < assert_test_count) {
       printf("%s\n", assert_test_names[index]);
       index++;
     }
-    return 1;
+    exit(1);
   }
-  return 0;
 }
 
-static int assert_test_help(char *argv[]) {
-  if (strcmp(argv[1], "--help") == 0 || strcmp(argv[1], "-h") == 0) {
+static void assert_test_help(int argc, char *argv[]) {
+  if (argc == 2 && (strcmp(argv[1], "--help") == 0 || strcmp(argv[1], "-h") == 0)) {
     printf("Usage: %s [test,]\nOptions:\n", argv[0]);
     printf("  -t  --tests    list all tests\n");
-    return 1;
+    exit(1);
   }
-  return 0;
 }
 
 void assert_add_(void (*fn)(), const char *name) {
@@ -55,11 +54,8 @@ int assert_run(int argc, char *argv[]) {
   int passes = 0;
   int fails = 0;
   
-  if (argc == 2 && assert_test_list(argv)) {
-    return 0;
-  } else if (argc == 2 && assert_test_help(argv)) {
-    return 0;
-  }
+  assert_test_list(argc, argv);
+  assert_test_help(argc, argv);
 
   assert_test_index = 0;
   while (assert_test_index < assert_test_count) {
