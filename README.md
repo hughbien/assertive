@@ -3,11 +3,23 @@ Description
 
 Assertive is an incomplete unit test library for C.
 
+Install
+=======
+
+Copy `assertive.h` and `assertive.c` to your project.
+
+Optionally, you can create a static library for all your projects:
+
+    % make libassertive.a
+    % cp libassertive.a /usr/local/lib/.
+    % cp assertive.h /usr/local/include/.
+    % cd path/to/project
+    % gcc -I/usr/local/include -L/usr/local/lib -lassertive *.c
+
 Usage
 =====
 
-Just two files are required: `assertive.h` and `assertive.c`.  Here's an
-example test file:
+Here's an example test file:
 
     #incldue "assertive.h"
 
@@ -63,7 +75,6 @@ assertion fails.  Create a macro so you don't have to manually pass in the
 TODO
 ====
 
-* system installation option
 * regex support
 * add zsh autocompletion file
 * add vim quickfix config

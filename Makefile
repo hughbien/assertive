@@ -11,8 +11,11 @@ test: a.out
 a.out: $(OBJ)
 	$(CC) $^
 
+libassertive.a: assertive.o
+	ar rcs libassertive.a $<
+
 tags:
 	ctags -f .tags *.c *.h
 
 clean:
-	rm -f *.o a.out
+	rm -f *.o *.a a.out
