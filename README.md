@@ -27,12 +27,17 @@ Here's an example test file:
       assert_int_equal(2, 1+1);
     }
 
+    void test_addition_dbl() {
+      assert_dbl_equal(2.0, 1.0+1.0, 0.1);
+    }
+
     void test_str() {
       assert_str_equal("expected", "actual");
     }
 
     int main(int argc, char *argv[]) {
       assert_add(test_addition);
+      assert_add(test_addition_dbl);
       assert_add(test_str);
       return assert_run(argc, argv);
     }
@@ -41,7 +46,7 @@ Then on the command line:
 
     % gcc *.c
     % a.out
-    .F
+    ..F
 
     1) test_str@example.c:9 Expected <"expected"> but was <"actual">
 
@@ -53,6 +58,20 @@ You can pass any number of test names to run focused tests also:
     .
 
     OK (1 tests)
+
+Use the `-t` or `--tests` options to get a list of available tests:
+
+    % a.out -t
+    test_addition
+    test_addition_dbl
+    test_str
+
+This is handy along with `xargs`:
+
+    % a.out -t | grep addition | xargs a.out
+    ..
+
+    OK (2 tests)
 
 You can write your own assertions.  Implement a function which takes a filename
 and line number as its first two parameters.  Call `assert_fail` if your
@@ -75,7 +94,6 @@ assertion fails.  Create a macro so you don't have to manually pass in the
 TODO
 ====
 
-* regex support
 * add zsh autocompletion file
 * add vim quickfix config
 
