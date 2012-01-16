@@ -79,10 +79,10 @@ int assert_run(int argc, char *argv[]) {
 
   if (fails > 0) {
     printf("\n\n%s\nPasses: %d, Fails: %d\n", assert_test_buffer, passes, fails);
-    return 0;
+    return 1;
   } else {
     printf("\n\nOK (%d tests)\n", passes);
-    return 1;
+    return 0;
   }
 }
 
