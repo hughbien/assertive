@@ -64,9 +64,7 @@ TODO
 ====
 
 * system installation option
-* faster test discovery
 * regex support
-* add a `--tests` option to list all tests
 * add zsh autocompletion file
 * add vim quickfix config
 
