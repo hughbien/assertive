@@ -3,7 +3,7 @@ DEPS=assertive.h
 OBJ=assertive.o example_test.o
 
 %.o: %.c $(DEPS)
-	$(CC) -c -o $@ $<
+	$(CC) -Wall -c -o $@ $<
 
 test: a.out
 	a.out
