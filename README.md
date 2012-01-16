@@ -133,11 +133,11 @@ Vim Quickfix
 
 For Quickfix support, add this to your errorformat:
 
-    set errorformat+=%n)\ %.%#@%f:%l\ %m,%-G%.%#
+    set errorformat+=%\\d%\\+)\ %.%#@%f:%l\ %m,%-G%.%#
 
 I added this line to my `.vimrc` file for editing C:
 
-    au filetype c set efm+=%n)\ %.%#@%f:%l\ %m,%-G%.%# " assertive support
+    au filetype c set efm+=%\\d%\\+)\ %.%#@%f:%l\ %m,%-G%.%# " assertive support
 
 License
 =======
