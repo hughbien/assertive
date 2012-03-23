@@ -11,10 +11,12 @@ Copy `assertive.h` and `assertive.c` to your project.
 Optionally, you can create a static library for all your projects:
 
     % make libassertive.a
-    % cp libassertive.a /usr/local/lib/.
-    % cp assertive.h /usr/local/include/.
+    % cp libassertive.a /usr/lib/.
+    % cp assertive.h /usr/include/.
     % cd path/to/project
-    % gcc -lassertive *.c
+    % gcc -static *_test.c -lassertive
+
+On OS X, use `/usr/local/lib` and `/usr/local/include` instead.
 
 Usage
 =====
