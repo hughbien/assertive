@@ -25,12 +25,24 @@ static int assert_test_continue(int argc, char *argv[], const char *name, const 
   return 1;
 }
 
+static int assert_suite_compare(const void *p1, const void *p2) {
+  return strcmp(* (char * const*) p1, * (char * const*) p2);
+}
+
 static void assert_test_list(int argc, char *argv[]) {
-  if (argc == 2 && (strcmp(argv[1], "--tests") == 0 || strcmp(argv[1], "-t") == 0)) {
-    int index = 0;
-    while (index < assert_test_count) {
-      printf("%s\n", assert_test_names[index]);
-      index++;
+  if (argc == 2 && (strcmp(argv[1], "--list") == 0 || strcmp(argv[1], "-l") == 0)) {
+    qsort(assert_test_suites, assert_test_count, sizeof(const char *), assert_suite_compare);
+    int i;
+    const char *temp = assert_test_suites[0];
+    printf("%s\n", temp);
+    for (i = 1; i < assert_test_count; i++) {
+      if (temp != assert_test_suites[i]) {
+        temp = assert_test_suites[i];
+        printf("%s\n", temp);
+      }
+    }
+    for (i = 0; i < assert_test_count; i++) {
+      printf("%s\n", assert_test_names[i]);
     }
     exit(1);
   }
@@ -39,7 +51,7 @@ static void assert_test_list(int argc, char *argv[]) {
 static void assert_test_help(int argc, char *argv[]) {
   if (argc == 2 && (strcmp(argv[1], "--help") == 0 || strcmp(argv[1], "-h") == 0)) {
     printf("Usage: %s [test-or-suite,]\nOptions:\n", argv[0]);
-    printf("  -t  --tests    list all tests\n");
+    printf("  -l  --list    list all tests and suites\n");
     exit(1);
   }
 }

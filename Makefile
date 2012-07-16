@@ -1,7 +1,7 @@
 CC=gcc
 OUT=assertive
 DEPS=assertive.h
-OBJ=assertive.o example_test.o
+OBJ=assertive.o example_pass_test.o example_fail_test.o example_test.o
 
 %.o: %.c $(DEPS)
 	$(CC) -Wall -c -o $@ $<

@@ -70,11 +70,13 @@ Or pass the base filename to run tests grouped in it:
 
     % a.out math_test.c
     ....
+
     OK (4 tests)
 
-Use the `-t` or `--tests` options to get a list of available tests:
+Use the `-l` or `--list` options to get a list of available tests/suites:
 
-    % a.out -t
+    % a.out -l
+    math_test.c
     test_addition
     test_addition_dbl
     test_str
@@ -121,7 +123,7 @@ Zsh Tab Completion
 Here's an example zsh completion function for the binary `assertive`:
 
     #compdef assertive
-    compadd `assertive -t | sort`
+    compadd `assertive -l | sort`
 
 I placed this into an `_assertive` file and into my `site-functions` directory
 for zsh.  This is located wherever `$fpath` points to:
@@ -146,12 +148,6 @@ For Quickfix support, add this to your errorformat:
 I added this line to my `.vimrc` file for editing C:
 
     au filetype c set errorformat+=%\\d%\\+)\ %.%#@%f:%l\ %m " assertive support
-
-TODO
-====
-
-* add colorized output
-* add "suite" support, use filenames
 
 License
 =======
