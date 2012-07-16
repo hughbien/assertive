@@ -66,6 +66,12 @@ You can pass any number of test names to run focused tests also:
 
     OK (1 tests)
 
+Or pass the base filename to run tests grouped in it:
+
+    % a.out math_test.c
+    ....
+    OK (4 tests)
+
 Use the `-t` or `--tests` options to get a list of available tests:
 
     % a.out -t

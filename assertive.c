@@ -9,17 +9,18 @@
 
 static void (*assert_test_fns[ASSERTIVE_MAX_TESTS])();
 static const char *assert_test_names[ASSERTIVE_MAX_TESTS];
+static const char *assert_test_suites[ASSERTIVE_MAX_TESTS];
 static int assert_test_flags[ASSERTIVE_MAX_TESTS];
 static int assert_test_count = 0;
 static int assert_test_index = 0;
 static char assert_test_buffer[ASSERTIVE_MAX_BUFFER];
 static jmp_buf assert_test_jump;
 
-static int assert_test_continue(int argc, char *argv[], const char *name) {
+static int assert_test_continue(int argc, char *argv[], const char *name, const char *suite) {
   if (argc == 1) { return 0; }
   int index;
   for (index = 0; index < argc; index++) {
-    if (strcmp(name, argv[index]) == 0) { return 0; }
+    if (strcmp(name, argv[index]) == 0 || strcmp(suite, argv[index]) == 0) { return 0; }
   }
   return 1;
 }
@@ -37,16 +38,17 @@ static void assert_test_list(int argc, char *argv[]) {
 
 static void assert_test_help(int argc, char *argv[]) {
   if (argc == 2 && (strcmp(argv[1], "--help") == 0 || strcmp(argv[1], "-h") == 0)) {
-    printf("Usage: %s [test,]\nOptions:\n", argv[0]);
+    printf("Usage: %s [test-or-suite,]\nOptions:\n", argv[0]);
     printf("  -t  --tests    list all tests\n");
     exit(1);
   }
 }
 
-void assert_add_(void (*fn)(), const char *name) {
+void assert_add_(void (*fn)(), const char *name, const char *suite) {
   assert(assert_test_count < ASSERTIVE_MAX_TESTS);
   assert_test_fns[assert_test_count] = fn;
   assert_test_names[assert_test_count] = name;
+  assert_test_suites[assert_test_count] = suite;
   assert_test_count++;
 }
 
@@ -59,7 +61,9 @@ int assert_run(int argc, char *argv[]) {
 
   assert_test_index = 0;
   while (assert_test_index < assert_test_count) {
-    if (assert_test_continue(argc, argv, assert_test_names[assert_test_index])) {
+    if (assert_test_continue(argc, argv,
+                             assert_test_names[assert_test_index],
+                             assert_test_suites[assert_test_index])) {
       assert_test_index++;
       continue;
     }

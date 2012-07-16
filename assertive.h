@@ -18,7 +18,7 @@
 #define assert_dbl_not_equal(ex,ac,dt) assert_dbl_not_equal_(__FILE__,__LINE__,(ex),(ac),(dt))
 #define assert_ptr_equal(ex,ac)        assert_ptr_equal_(__FILE__,__LINE__,(ex),(ac))
 #define assert_ptr_not_equal(ex,ac)    assert_ptr_not_equal_(__FILE__,__LINE__,(ex),(ac))
-#define assert_add(fn)                 assert_add_((fn),(#fn))
+#define assert_add(fn)                 assert_add_((fn),(#fn),__FILE__)
 
 /* public functions */
 int assert_run(int argc, char *argv[]);
@@ -37,6 +37,6 @@ void assert_dbl_equal_(const char *file, int line, double ex, double ac, double 
 void assert_dbl_not_equal_(const char *file, int line, double ex, double ac, double dt);
 void assert_ptr_equal_(const char *file, int line, void *ex, void *ac);
 void assert_ptr_not_equal_(const char *file, int line, void *ex, void *ac);
-void assert_add_(void (*fn)(), const char *name);
+void assert_add_(void (*fn)(), const char *name, const char *suite);
 
 #endif /* ASSERTIVE_H */
