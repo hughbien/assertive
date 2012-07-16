@@ -1,7 +1,7 @@
 CC=gcc
 OUT=assertive
 DEPS=assertive.h
-OBJ=assertive.o example_pass_test.o example_fail_test.o example_test.o
+OBJ=assertive.o test/pass_test.o test/fail_test.o test/main.o
 
 %.o: %.c $(DEPS)
 	$(CC) -Wall -c -o $@ $<
@@ -19,4 +19,4 @@ tags:
 	ctags -f .tags *.c *.h
 
 clean:
-	rm -f *.o *.a $(OUT)
+	rm -f *.o test/*.o *.a $(OUT)

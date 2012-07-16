@@ -66,7 +66,7 @@ You can pass any number of test names to run focused tests also:
 
     OK (1 tests)
 
-Or pass the base filename to run tests grouped in it:
+Or pass the filename to run tests grouped in it:
 
     % a.out math_test.c
     ....
