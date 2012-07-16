@@ -7,7 +7,7 @@ OBJ=assertive.o example_pass_test.o example_fail_test.o example_test.o
 	$(CC) -Wall -c -o $@ $<
 
 test: $(OUT)
-	$(OUT)
+	$(OUT) $(TEST)
 
 $(OUT): $(OBJ)
 	$(CC) $^ -o $(OUT)
