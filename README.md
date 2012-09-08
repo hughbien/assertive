@@ -10,11 +10,11 @@ Copy `assertive.h` and `assertive.c` to your project.
 
 Optionally, you can create a static library for all your projects:
 
-    % make libassertive.a
-    % cp libassertive.a /usr/lib/.
-    % cp assertive.h /usr/include/.
-    % cd path/to/project
-    % gcc -static *_test.c -lassertive
+    $ make libassertive.a
+    $ cp libassertive.a /usr/lib/.
+    $ cp assertive.h /usr/include/.
+    $ cd path/to/project
+    $ gcc -static *_test.c -lassertive
 
 On OS X, use `/usr/local/lib` and `/usr/local/include` instead.
 
@@ -46,8 +46,8 @@ Here's an example test file:
 
 Then on the command line:
 
-    % gcc *.c
-    % a.out
+    $ gcc *.c
+    $ a.out
     ..F
 
     1) test_str@example.c:9 Expected <"expected"> but was <"actual">
@@ -61,21 +61,21 @@ Run Focused Tests
 
 You can pass any number of test names to run focused tests also:
 
-    % a.out test_addition
+    $ a.out test_addition
     .
 
     OK (1 tests)
 
 Or pass the filename to run tests grouped in it:
 
-    % a.out math_test.c
+    $ a.out math_test.c
     ....
 
     OK (4 tests)
 
 Use the `-l` or `--list` options to get a list of available tests/suites:
 
-    % a.out -l
+    $ a.out -l
     math_test.c
     test_addition
     test_addition_dbl
@@ -83,7 +83,7 @@ Use the `-l` or `--list` options to get a list of available tests/suites:
 
 This is handy along with `xargs`:
 
-    % a.out -t | grep addition | xargs a.out
+    $ a.out -t | grep addition | xargs a.out
     ..
 
     OK (2 tests)
@@ -115,7 +115,7 @@ Documentation
 Man pages are available under the `man` directory.  To install, copy them to
 your `$MANPATH` directory.  For example:
 
-    % cp man/* /usr/share/man/man3/.
+    $ cp man/* /usr/share/man/man3/.
 
 Zsh Tab Completion
 ==================
@@ -128,14 +128,14 @@ Here's an example zsh completion function for the binary `assertive`:
 I placed this into an `_assertive` file and into my `site-functions` directory
 for zsh.  This is located wherever `$fpath` points to:
 
-    % echo $fpath
+    $ echo $fpath
     /usr/share/zsh/site-functions /usr/share/zsh/4.3.11/functions
-    % sudo mv _assertive /usr/share/zsh/site-functions
+    $ mv _assertive /usr/share/zsh/site-functions
 
 This only works if the compiled binary is named `assertive`.
 
-    % gcc -lassertive *.c -o assertive
-    % assertive test_<tab>
+    $ gcc -lassertive *.c -o assertive
+    $ assertive test_<tab>
     test_addition test_addition_dbl test_str
 
 Vim Quickfix
@@ -152,5 +152,5 @@ I added this line to my `.vimrc` file for editing C:
 License
 =======
 
-Copyright 2012 Hugh Bien - http://hughbien.com.
+Copyright Hugh Bien - http://hughbien.com.
 Released under BSD License, see LICENSE.md for more info.
